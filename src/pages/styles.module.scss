@@ -1,0 +1,42 @@
+.site_layout {
+    .trigger {
+        padding-top: 0.3rem;
+        margin-left: 1rem;
+        background-color: #2c2c2c;
+        color: white;
+        font-size: 1.2rem;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #2c2c2c;
+        border-radius: 50%;
+    }
+    .title {
+        font-size: 1.5rem;
+        font-weight: 400;
+        padding-left: 0.4rem;
+    }
+
+    Input {
+        width: 10rem;
+    }
+}
+
+.content {
+    background-color: #f4f3ef;
+    margin: 24px 16px;
+    padding: 24;
+    min-height: 280;
+    background-color: 'colorBgContainer';
+}
+
+.searchInput {
+    margin-left: 40rem;
+    height: 2rem;
+    position: relative;
+}
+
+.icon {
+    margin-left: 2rem;
+    font-size: larger;
+    position: relative;
+}

@@ -1,0 +1,37 @@
+.card {
+    width: 300px;
+    display: flex;
+    .top {
+        display: flex;
+        height: 100px;
+        .img {
+            width: 130px;
+            .icon {
+                font-size: 80px;
+                color: rgba(213, 160, 15, 0.448);
+            }
+        }
+        .title {
+            width: 130px;
+            text-align: right;
+            display: inline-block;
+            .capacity {
+                font-size: larger;
+            }
+            .memory {
+                font-size: 15pt;
+            }
+        }
+    }
+    .hr {
+        text-align: center;
+        width: 250px;
+    }
+
+    .bottom {
+        height: 10px;
+        .update {
+            margin-left: 0.5rem;
+        }
+    }
+}
