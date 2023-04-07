@@ -53,8 +53,8 @@ const App: React.FC = () => {
                             key: '3',
                             icon: <FaCertificate />,
                             onClick: () => {
-                                console.log(111)
-                                routes.push('/product')
+                                // console.log(111)
+                                routes.push('/category')
                             },
                             label: 'Categories',
                         },
