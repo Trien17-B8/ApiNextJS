@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Input } from 'antd'
-import { dataCategory } from '@/components/Table/data'
+import { dataCategory } from '@/containers/Table/data'
 import { Space, Table, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useRouter } from 'next/router'

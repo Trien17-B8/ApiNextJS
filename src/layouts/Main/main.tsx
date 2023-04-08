@@ -1,9 +1,9 @@
 import React from 'react'
 import { Col, Row } from 'antd'
-import CardComponents from '@/components/Card/card'
-import ChardComponents from '@/components/Chart/chart'
+import CardComponents from '@/containers/Card/card'
+import ChardComponents from '@/containers/Chart/chart'
 import styles from './styles.module.scss'
-import StatisticComponents from '@/components/Statistic/Statistic'
+import StatisticComponents from '@/containers/Statistic/Statistic'
 
 export default function Main() {
     return (

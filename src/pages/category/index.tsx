@@ -1,4 +1,4 @@
-import TablesCategory from '@/components/Table/tableCategory'
+import TablesCategory from '@/containers/Table/tableCategory'
 import React from 'react'
 
 export default function Category() {
