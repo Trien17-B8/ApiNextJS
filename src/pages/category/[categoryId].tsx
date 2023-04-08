@@ -22,36 +22,6 @@ const NewCategory: React.FC = () => {
         setCategory((category) => {
             return [...category, categoryValues]
         })
-
-        // const categoryValues = form.getFieldsValue()
-        // e.preventDefault
-        // console.log(e)
-        // // setCategory({ ...category, categoryValues })
-        // console.log(category)
-        // category.push(categoryValues)
-        // console.log(category)
-    }
-
-    const detailCategory = (record: any) => {
-        setCategory((category) => {
-            return category.filter((data) => {
-                if (data.key === record.key) {
-                    form.setFieldValue('key', data.key),
-                        form.setFieldValue('name', data.name),
-                        form.setFieldValue('type', data.type)
-                }
-                routers.push({
-                    pathname: `/category/${data.key}`,
-                })
-            })
-            //data.key == record.key
-        })
-    }
-
-    const deleteCategory = (record: any) => {
-        setCategory((category) => {
-            return category.filter((data) => data.key !== record.key)
-        })
     }
 
     interface DataType {
@@ -71,32 +41,6 @@ const NewCategory: React.FC = () => {
             title: 'Type',
             dataIndex: 'type',
             key: 'type',
-        },
-
-        {
-            title: 'Action',
-            key: 'action',
-            render: (_, record) => (
-                <Space size="middle">
-                    <button
-                        onClick={() => {
-                            detailCategory(record)
-                        }}
-                    >
-                        Detail
-                    </button>
-                    <button>
-                        <a>Update</a>
-                    </button>
-                    <button
-                        onClick={() => {
-                            deleteCategory(record)
-                        }}
-                    >
-                        <a>Delete</a>
-                    </button>
-                </Space>
-            ),
         },
     ]
 
@@ -126,12 +70,10 @@ const NewCategory: React.FC = () => {
 
                 <Form.Item label=" ">
                     <Button type="primary" htmlType="submit">
-                        Submit
+                        Update
                     </Button>
                 </Form.Item>
             </Form>
-
-            <Table columns={columns} dataSource={category} />
         </>
     )
 }
