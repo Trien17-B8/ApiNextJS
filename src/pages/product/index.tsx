@@ -1,10 +1,10 @@
-import Tables from '@/components/Table/table'
+import TableProduct from '@/containers/Table/tableProduct'
 import React from 'react'
 
 export default function Product() {
     return (
         <div>
-            <Tables />
+            <TableProduct />
         </div>
     )
 }

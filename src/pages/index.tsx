@@ -78,6 +78,9 @@ const App: React.FC = () => {
                     <RiLayoutMasonryLine className={styles.icon} />
                     <BsBellFill className={styles.icon} />
                     <FiSettings className={styles.icon} />
+                    <Link href={'/login'} className={styles.login}>
+                        Đăng Nhập
+                    </Link>
                 </Header>
                 <Content className={styles.content}>
                     <Main />

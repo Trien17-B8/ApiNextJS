@@ -11,9 +11,6 @@ const NewCategory: React.FC = () => {
     const [form] = Form.useForm()
 
     useEffect(() => {
-        // setCategory(dataCategory)
-        // dataCategory
-        // form.setFieldValue('key', '122') detail
         console.log(category)
     }, [category])
 
@@ -22,14 +19,7 @@ const NewCategory: React.FC = () => {
         setCategory((category) => {
             return [...category, categoryValues]
         })
-
-        // const categoryValues = form.getFieldsValue()
-        // e.preventDefault
-        // console.log(e)
-        // // setCategory({ ...category, categoryValues })
-        // console.log(category)
-        // category.push(categoryValues)
-        // console.log(category)
+        console.log(categoryValues)
     }
 
     const detailCategory = (record: any) => {
@@ -44,7 +34,6 @@ const NewCategory: React.FC = () => {
                     pathname: `/category/${data.key}`,
                 })
             })
-            //data.key == record.key
         })
     }
 
@@ -84,9 +73,6 @@ const NewCategory: React.FC = () => {
                         }}
                     >
                         Detail
-                    </button>
-                    <button>
-                        <a>Update</a>
                     </button>
                     <button
                         onClick={() => {
