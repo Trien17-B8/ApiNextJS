@@ -13,7 +13,7 @@ interface Product {
     description: string
 }
 
-const TableProduct: React.FC<Product> = () => {
+const TableProduct = () => {
     const [form] = Form.useForm()
     const [dataProduct, setDataProduct] = useState([])
     const router = useRouter()
