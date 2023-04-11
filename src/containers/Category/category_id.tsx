@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Input } from 'antd'
-import { dataCategory } from '@/containers/Table/data'
+import { dataCategory } from './data'
 
 const CategoryIdComponents: React.FC = () => {
     const [category, setCategory] = useState(dataCategory)

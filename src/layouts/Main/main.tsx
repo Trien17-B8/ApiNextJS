@@ -3,7 +3,7 @@ import { Col, Row } from 'antd'
 import CardComponents from '@/containers/Card/card'
 import ChardComponents from '@/containers/Chart/chart'
 import styles from './styles.module.scss'
-import StatisticComponents from '@/containers/Statistic/Statistic'
+import StatisticComponents from '@/containers/Statistic/statistic'
 
 export default function Main() {
     return (

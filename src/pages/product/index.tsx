@@ -1,4 +1,4 @@
-import TableProduct from '@/containers/Table/tableProduct'
+import TableProduct from '@/containers/Product/table_product'
 import React from 'react'
 
 export default function Product() {

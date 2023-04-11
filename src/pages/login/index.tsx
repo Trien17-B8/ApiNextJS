@@ -1,6 +1,6 @@
 import React from 'react'
-import { Alert, Button, Checkbox, Form, Input } from 'antd'
-import styled from './styled.module.scss'
+import { Button, Checkbox, Form, Input } from 'antd'
+import styled from './styles.module.scss'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 
