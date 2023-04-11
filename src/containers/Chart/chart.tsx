@@ -38,7 +38,7 @@ const Data: Chart[] = [
     },
 ]
 
-const ChardComponents: React.FC = () => (
+const ChardComponents = () => (
     <div>
         {Data.map((data, index) => {
             return (

@@ -5,7 +5,7 @@ import { Space, Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useRouter } from 'next/router'
 
-const NewCategory: React.FC = () => {
+const NewCategory = () => {
     const routers = useRouter()
     const [category, setCategory] = useState(dataCategory)
     const [form] = Form.useForm()

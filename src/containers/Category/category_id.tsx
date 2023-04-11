@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, Form, Input } from 'antd'
 import { dataCategory } from './data'
 
-const CategoryIdComponents: React.FC = () => {
+const CategoryIdComponents = () => {
     const [category, setCategory] = useState(dataCategory)
     const [form] = Form.useForm()
 
@@ -12,7 +12,6 @@ const CategoryIdComponents: React.FC = () => {
 
     const onFinish = () => {
         const categoryValues = form.getFieldsValue()
-
         setCategory((category) => {
             return [...category, categoryValues]
         })

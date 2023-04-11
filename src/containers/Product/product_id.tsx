@@ -1,20 +1,39 @@
 import React, { useEffect } from 'react'
 import { Button, Form, Input } from 'antd'
+import { useApi } from '@/apis/useApi'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
-export default function ProductId() {
-    const [form] = Form.useForm()
+interface Product {
+    id: number
+    title: string
+    price: number
+    description: string
+}
+
+const ProductId: React.FC<Product> = () => {
     const router = useRouter()
     const { id } = router.query
+    const api = useApi()
+    const [form] = Form.useForm()
 
     useEffect(() => {
+        // const router = useRouter()
+        // const { id } = router.query
+        // const data = api.getProductById(id)
+        // if (data) {
+        //     form.setFieldValue('id', data.data.id),
+        //         form.setFieldValue('title', data.title),
+        //         form.setFieldValue('price', response.data.price),
+        //         form.setFieldValue('description', response.data.description)
+        // }
         axios
-            .get(`https://63ddd4289fa0d60060f59330.mockapi.io/product/${id}`)
+            .get(`https://dummyjson.com/products/${id}`)
             .then((response) => {
-                form.setFieldValue('name', response.data.name),
+                form.setFieldValue('id', response.data.id),
+                    form.setFieldValue('title', response.data.title),
                     form.setFieldValue('price', response.data.price),
-                    form.setFieldValue('quantity', response.data.quantity)
+                    form.setFieldValue('description', response.data.description)
             })
             .catch((err) => {
                 console.log(err)
@@ -22,22 +41,22 @@ export default function ProductId() {
     }, [])
 
     const onFinish = async () => {
-        const nameInput = form.getFieldValue('name')
+        const idInput = form.getFieldValue('id')
+        const titleInput = form.getFieldValue('title')
         const priceInput = form.getFieldValue('price')
-        const quantityInput = form.getFieldValue('quantity')
-        await axios
-            .put(`https://63ddd4289fa0d60060f59330.mockapi.io/product/${id}`, {
-                name: nameInput,
-                price: priceInput,
-                quantity: quantityInput,
-            })
-            .then(function (response) {
-                console.log('update oke', response.data)
-                router.push('/product')
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        const desInput = form.getFieldValue('description')
+
+        const data = await api.createProduct({
+            id: idInput,
+            title: titleInput,
+            price: priceInput,
+            description: desInput,
+        })
+        if (data) {
+            alert('Update Product Success')
+        } else {
+            console.log('Add Product Fail')
+        }
     }
 
     return (
@@ -53,13 +72,16 @@ export default function ProductId() {
                 colon={false}
                 style={{ maxWidth: 600 }}
             >
-                <Form.Item label="Name" name="name">
+                <Form.Item label="ID" name="id">
+                    <Input />
+                </Form.Item>
+                <Form.Item label="Title" name="title">
                     <Input />
                 </Form.Item>
                 <Form.Item label="Price" name="price">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Quantity" name="quantity">
+                <Form.Item label="Description" name="description">
                     <Input />
                 </Form.Item>
 
@@ -72,3 +94,5 @@ export default function ProductId() {
         </div>
     )
 }
+
+export default ProductId

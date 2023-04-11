@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 import { AiOutlineGlobal } from '@react-icons/all-files/ai/AiOutlineGlobal'
 import { GrUpdate } from '@react-icons/all-files/gr/GrUpdate'
 
-const CardComponents: React.FC = () => (
+const CardComponents = () => (
     <Space direction="vertical" size={16}>
         <Card className={styles.card}>
             <div className={styles.top}>

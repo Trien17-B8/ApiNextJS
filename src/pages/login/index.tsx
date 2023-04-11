@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Checkbox, Form, Input } from 'antd'
-import styled from './styles.module.scss'
+import styles from './styles.module.scss'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 
@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     }
 }
 
-export default function Login({ data }: Login) {
+const Login: React.FC<Login> = ({ data }) => {
     console.log(data)
 
     const [form] = Form.useForm()
@@ -47,7 +47,7 @@ export default function Login({ data }: Login) {
     return (
         <Form
             form={form}
-            className={styled.login}
+            className={styles.login}
             name="basic"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
@@ -56,7 +56,7 @@ export default function Login({ data }: Login) {
             onFinish={onFinish}
             autoComplete="off"
         >
-            <h1 className={styled.title}>Login</h1>
+            <h1 className={styles.title}>Login</h1>
 
             <Form.Item
                 label="Username"
@@ -91,7 +91,7 @@ export default function Login({ data }: Login) {
                     Submit
                 </Button>
                 <Button
-                    className={styled.cancel}
+                    className={styles.cancel}
                     onClick={() => {
                         routers.push('/')
                     }}
@@ -102,3 +102,5 @@ export default function Login({ data }: Login) {
         </Form>
     )
 }
+
+export default Login

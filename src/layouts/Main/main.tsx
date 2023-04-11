@@ -5,7 +5,7 @@ import ChardComponents from '@/containers/Chart/chart'
 import styles from './styles.module.scss'
 import StatisticComponents from '@/containers/Statistic/statistic'
 
-export default function Main() {
+const Main = () => {
     return (
         <div>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
@@ -49,3 +49,5 @@ export default function Main() {
         </div>
     )
 }
+
+export default Main

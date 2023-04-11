@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useApi } from '@/apis/useApi'
 import { Space, Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { Button, Form, Input } from 'antd'
@@ -6,52 +7,56 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 
 interface Product {
-    key: string
-    name: string
+    id: number
+    title: string
     price: number
-    quantity: number
+    description: string
 }
 
-export default function TableProduct() {
+const TableProduct: React.FC<Product> = () => {
     const [form] = Form.useForm()
-    const [data, setData] = useState([])
+    const [dataProduct, setDataProduct] = useState([])
     const router = useRouter()
+    const api = useApi()
 
     useEffect(() => {
-        axios
-            .get('https://63ddd4289fa0d60060f59330.mockapi.io/product')
-            .then((response) => {
-                // console.log(response.data)
-                setData(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        const getProducts = async () => {
+            const data: any = await api.getProducts()
+            setDataProduct(data)
+        }
+        getProducts()
     }, [])
 
     const onFinish = async () => {
-        const nameInput = form.getFieldValue('name')
+        const idInput = form.getFieldValue('id')
+        const titleInput = form.getFieldValue('title')
         const priceInput = form.getFieldValue('price')
-        const quantityInput = form.getFieldValue('quantity')
-        await axios
-            .post('https://63ddd4289fa0d60060f59330.mockapi.io/product', {
-                name: nameInput,
-                price: priceInput,
-                quantity: quantityInput,
-            })
-            .then(function (response) {
-                console.log('oke', response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        const desInput = form.getFieldValue('description')
+
+        const data = await api.createProduct({
+            id: idInput,
+            title: titleInput,
+            price: priceInput,
+            description: desInput,
+        })
+        if (data) {
+            alert('Add Product Success')
+        } else {
+            console.log('Add Product Fail')
+        }
     }
 
-    const detailProduct = (key: string) => {
+    const detailProduct = async (id: number) => {
+        const detail = await api.getProductById(id)
+        if (detail) {
+            router.push(`/product/${id}`)
+        } else {
+            return detail
+        }
         axios
-            .get(`https://63ddd4289fa0d60060f59330.mockapi.io/product/${key}`)
+            .get(`https://dummyjson.com/products/${id}`)
             .then((response) => {
-                router.push(`/product/${key}`)
+                router.push(`/product/${id}`)
                 return console.log(response.data)
             })
             .catch((err) => {
@@ -59,30 +64,26 @@ export default function TableProduct() {
             })
     }
 
-    const deleteProduct = async (key: string) => {
-        await axios
-            .delete(
-                `https://63ddd4289fa0d60060f59330.mockapi.io/product/${key}`
-            )
-            .then(function (response) {
-                console.log('Delete', response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+    const deleteProduct = async (id: number) => {
+        const remove = await api.deleteProduct(id)
+        if (remove) {
+            alert('Delete Product Success')
+            console.log('oke')
+        } else {
+            alert('Delete Product Fail')
+        }
     }
 
     const columns: ColumnsType<Product> = [
         {
-            title: 'Key',
-            dataIndex: 'key',
-            key: 'key',
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
         },
         {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-            render: (text) => <a>{text}</a>,
+            title: 'Title',
+            dataIndex: 'title',
+            key: 'title',
         },
         {
             title: 'Price',
@@ -90,9 +91,9 @@ export default function TableProduct() {
             key: 'price',
         },
         {
-            title: 'Quantity',
-            dataIndex: 'quantity',
-            key: 'quantity',
+            title: 'Description',
+            dataIndex: 'description',
+            key: 'description',
         },
         {
             title: 'Action',
@@ -101,14 +102,14 @@ export default function TableProduct() {
                 <Space size="middle">
                     <button
                         onClick={() => {
-                            detailProduct(record.key)
+                            detailProduct(record.id)
                         }}
                     >
                         Detail
                     </button>
                     <button
                         onClick={() => {
-                            deleteProduct(record.key)
+                            deleteProduct(record.id)
                         }}
                     >
                         Delete
@@ -130,13 +131,16 @@ export default function TableProduct() {
                 colon={false}
                 style={{ maxWidth: 600 }}
             >
-                <Form.Item label="Name" name="name">
+                <Form.Item label="ID" name="id">
+                    <Input />
+                </Form.Item>
+                <Form.Item label="Title" name="title">
                     <Input />
                 </Form.Item>
                 <Form.Item label="Price" name="price">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Quantity" name="quantity">
+                <Form.Item label="Description" name="description">
                     <Input />
                 </Form.Item>
 
@@ -146,7 +150,9 @@ export default function TableProduct() {
                     </Button>
                 </Form.Item>
             </Form>
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={dataProduct} />
         </>
     )
 }
+
+export default TableProduct
