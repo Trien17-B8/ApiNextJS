@@ -7,9 +7,9 @@ const ProductId = () => {
     const api = useApi()
     const [form] = Form.useForm()
     const router = useRouter()
+    const { id }: any = router.query
 
     useEffect(() => {
-        const { id }: any = router.query
         const data = api.getProductById(id)
         {
             data.then((response) => {
@@ -27,7 +27,7 @@ const ProductId = () => {
         const priceInput = form.getFieldValue('price')
         const desInput = form.getFieldValue('description')
 
-        const data = await api.createProduct({
+        const data = await api.updateProduct({
             id: idInput,
             title: titleInput,
             price: priceInput,
