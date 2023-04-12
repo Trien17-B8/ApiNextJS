@@ -2,42 +2,23 @@ import React, { useEffect } from 'react'
 import { Button, Form, Input } from 'antd'
 import { useApi } from '@/apis/useApi'
 import { useRouter } from 'next/router'
-import axios from 'axios'
 
-interface Product {
-    id: number
-    title: string
-    price: number
-    description: string
-}
-
-const ProductId: React.FC<Product> = () => {
-    const router = useRouter()
-    const { id } = router.query
+const ProductId = () => {
     const api = useApi()
     const [form] = Form.useForm()
+    const router = useRouter()
 
     useEffect(() => {
-        // const router = useRouter()
-        // const { id } = router.query
-        // const data = api.getProductById(id)
-        // if (data) {
-        //     form.setFieldValue('id', data.data.id),
-        //         form.setFieldValue('title', data.title),
-        //         form.setFieldValue('price', response.data.price),
-        //         form.setFieldValue('description', response.data.description)
-        // }
-        axios
-            .get(`https://dummyjson.com/products/${id}`)
-            .then((response) => {
-                form.setFieldValue('id', response.data.id),
-                    form.setFieldValue('title', response.data.title),
-                    form.setFieldValue('price', response.data.price),
-                    form.setFieldValue('description', response.data.description)
+        const { id }: any = router.query
+        const data = api.getProductById(id)
+        {
+            data.then((response) => {
+                form.setFieldValue('id', response.id),
+                    form.setFieldValue('title', response.title),
+                    form.setFieldValue('price', response.price),
+                    form.setFieldValue('description', response.description)
             })
-            .catch((err) => {
-                console.log(err)
-            })
+        }
     }, [])
 
     const onFinish = async () => {
@@ -55,7 +36,7 @@ const ProductId: React.FC<Product> = () => {
         if (data) {
             alert('Update Product Success')
         } else {
-            console.log('Add Product Fail')
+            console.log('Update Product Fail')
         }
     }
 

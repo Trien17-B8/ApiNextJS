@@ -2,7 +2,7 @@
 import $axios from '@/service/axios'
 
 interface Product {
-    id: number
+    id: string
     title: string
     price: number
     description: string
@@ -28,8 +28,8 @@ const useApi = () => {
             return data
         },
 
-        getProductById: async (id: number) => {
-            let data: string[] = []
+        getProductById: async (id: string) => {
+            let data: any = {}
             await $axios
                 .get(`products/${id}`, config)
                 .then((response) => {
@@ -50,7 +50,7 @@ const useApi = () => {
             return success
         },
 
-        deleteProduct: async (id: number) => {
+        deleteProduct: async (id: string) => {
             let success: boolean = false
             await $axios
                 .delete(`products/${id}`)
@@ -61,7 +61,7 @@ const useApi = () => {
             return success
         },
 
-        updateProduct: async (body?: Product, id?: number) => {
+        updateProduct: async (body?: Product, id?: string) => {
             let success: boolean = false
             await $axios
                 .put(`products/${id}`, body, config)

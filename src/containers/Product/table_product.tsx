@@ -3,11 +3,10 @@ import { useApi } from '@/apis/useApi'
 import { Space, Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { Button, Form, Input } from 'antd'
-import axios from 'axios'
 import { useRouter } from 'next/router'
 
 interface Product {
-    id: number
+    id: string
     title: string
     price: number
     description: string
@@ -46,25 +45,16 @@ const TableProduct = () => {
         }
     }
 
-    const detailProduct = async (id: number) => {
+    const detailProduct = async (id: string) => {
         const detail = await api.getProductById(id)
         if (detail) {
             router.push(`/product/${id}`)
         } else {
             return detail
         }
-        axios
-            .get(`https://dummyjson.com/products/${id}`)
-            .then((response) => {
-                router.push(`/product/${id}`)
-                return console.log(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
     }
 
-    const deleteProduct = async (id: number) => {
+    const deleteProduct = async (id: string) => {
         const remove = await api.deleteProduct(id)
         if (remove) {
             alert('Delete Product Success')
